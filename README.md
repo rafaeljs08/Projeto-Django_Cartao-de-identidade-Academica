@@ -2,7 +2,7 @@
 
 <img src="docs/assets/fepi-logo.png" alt="FEPI — Centro Universitário de Itajubá" width="280">
 
-# 🎓 Cartão de Identidade Acadêmica
+#  Cartão de Identidade Acadêmica
 
 **Backend Django — Disciplina Programação Backend (Python/Django)**
 
@@ -29,7 +29,7 @@ Desenvolvido como trabalho da disciplina **Programação Backend**, utilizando *
 
 ---
 
-## 🛠 Stack tecnológica
+##  Stack tecnológica
 
 | Tecnologia | Uso |
 |------------|-----|
@@ -40,14 +40,14 @@ Desenvolvido como trabalho da disciplina **Programação Backend**, utilizando *
 
 ---
 
-## 📦 Pré-requisitos
+##  Pré-requisitos
 
 - Python 3.11 ou superior
 - Git (para clonar o repositório)
 
 ---
 
-## 🚀 Instalação e execução
+##  Instalação e execução
 
 ```powershell
 # 1. Clone o repositório
@@ -81,7 +81,7 @@ python manage.py runserver
 
 ---
 
-## 👤 Cadastrar alunos
+##  Cadastrar alunos
 
 1. Acesse http://127.0.0.1:8000/admin/
 2. Faça login com o superusuário criado
@@ -90,7 +90,7 @@ python manage.py runserver
 
 ---
 
-## 🌐 Endpoints
+##  Endpoints
 
 | URL | Método | Descrição |
 |-----|--------|-----------|
@@ -100,7 +100,7 @@ python manage.py runserver
 
 ---
 
-## 🗄 Modelo de dados — Aluno
+##  Modelo de dados — Aluno
 
 | Campo | Tipo | Obrigatório | Descrição |
 |-------|------|:-----------:|-----------|
@@ -111,7 +111,7 @@ python manage.py runserver
 
 ---
 
-## 📸 Demonstração
+##  Demonstração
 
 A aplicação possui uma interface para visualização dos alunos e uma área administrativa para gerenciamento dos registros.
 
@@ -123,7 +123,7 @@ Tela inicial da aplicação, com acesso aos cartões dos alunos e à área admin
 
 ---
 
-### 🎓 Cartões de Identidade Acadêmica
+###  Cartões de Identidade Acadêmica
 
 Página de visualização dos alunos cadastrados, mostrando nome, curso e biografia.
 
@@ -131,7 +131,7 @@ Página de visualização dos alunos cadastrados, mostrando nome, curso e biogra
 
 ---
 
-### ⚙️ Painel Administrativo
+###  Painel Administrativo
 
 Área administrativa do Django utilizada para cadastrar, editar e gerenciar os alunos.
 
@@ -139,7 +139,7 @@ Página de visualização dos alunos cadastrados, mostrando nome, curso e biogra
 
 ---
 
-## 📁 Estrutura do projeto
+##  Estrutura do projeto
 
 ```
 Projeto-Django_Cartao-de-identidade-Academica/
@@ -168,7 +168,7 @@ Projeto-Django_Cartao-de-identidade-Academica/
 
 ---
 
-## 👨‍💻 Autor
+##  Autor
 
 **Rafael Junqueira de Souza**
 
