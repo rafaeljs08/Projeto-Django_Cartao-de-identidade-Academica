@@ -153,7 +153,7 @@ proj_DJANGO/
 
 ## 👨‍💻 Autor
 
-**Zanoli**
+**Rafael Junqueira de Souza**
 
 Trabalho individual — **Programação Backend (Python/Django)**
 
