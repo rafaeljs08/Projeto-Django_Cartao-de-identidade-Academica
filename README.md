@@ -9,7 +9,7 @@
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-5.2-092E20?style=for-the-badge&logo=django&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
-![FEPI](https://img.shields.io/badge/FEPI-Itajubá-5B2D8B?style=for-the-badge)
+![FEPI](https://img.shields.io/badge/FEPI-Itajubá-004088?style=for-the-badge)
 
 *Sistema de perfis digitais no estilo ficha de personagem — Nome, Curso e Bio*
 
@@ -51,8 +51,8 @@ Desenvolvido como trabalho da disciplina **Programação Backend**, utilizando *
 
 ```powershell
 # 1. Clone o repositório
-git clone <URL_DO_REPOSITORIO>
-cd proj_DJANGO
+git clone https://github.com/rafaeljs08/Projeto-Django_Cartao-de-identidade-Academica.git
+cd Projeto-Django_Cartao-de-identidade-Academica
 
 # 2. Crie e ative o ambiente virtual
 python -m venv venv
@@ -75,9 +75,9 @@ python manage.py runserver
 
 | Página | URL |
 |--------|-----|
+| 🏠 Página inicial | http://127.0.0.1:8000/ |
 | 🎴 Cartões dos alunos | http://127.0.0.1:8000/aluno/ |
 | ⚙️ Painel admin | http://127.0.0.1:8000/admin/ |
-| 🚀 Página inicial Django | http://127.0.0.1:8000/ |
 
 ---
 
@@ -94,7 +94,7 @@ python manage.py runserver
 
 | URL | Método | Descrição |
 |-----|--------|-----------|
-| `/` | `GET` | Página padrão do Django |
+| `/` | `GET` | Página inicial com acesso à plataforma |
 | `/admin/` | `GET` / `POST` | Painel administrativo — cadastro de alunos |
 | `/aluno/` | `GET` | Lista os cartões de identidade acadêmica |
 
@@ -113,32 +113,49 @@ python manage.py runserver
 
 ## 📸 Demonstração
 
-> Adicione aqui prints ou GIF mostrando:
->
-> - A página `/aluno/` com cartões cadastrados
-> - O painel `/admin/` com alunos registrados
-> - A mensagem *"Nenhum aluno cadastrado ainda."* quando a lista estiver vazia
+A aplicação possui uma interface para visualização dos alunos e uma área administrativa para gerenciamento dos registros.
 
-<!-- Exemplo quando tiver as imagens:
-![Cartões dos alunos](docs/assets/demo-aluno.png)
-![Painel Admin](docs/assets/demo-admin.png)
--->
+### 🏠 Página inicial
+
+Tela inicial da aplicação, com acesso aos cartões dos alunos e à área administrativa.
+
+![Página inicial](docs/assets/demo-pagina-inicial.png)
+
+---
+
+### 🎓 Cartões de Identidade Acadêmica
+
+Página de visualização dos alunos cadastrados, mostrando nome, curso e biografia.
+
+![Cartões dos alunos](docs/assets/demo-cartoes-alunos.png)
+
+---
+
+### ⚙️ Painel Administrativo
+
+Área administrativa do Django utilizada para cadastrar, editar e gerenciar os alunos.
+
+![Painel administrativo](docs/assets/demo-painel-admin.png)
 
 ---
 
 ## 📁 Estrutura do projeto
 
 ```
-proj_DJANGO/
+Projeto-Django_Cartao-de-identidade-Academica/
 ├── manage.py
 ├── requirements.txt
 ├── README.md
 ├── docs/
 │   └── assets/
-│       └── fepi-logo.png
+│       ├── fepi-logo.png
+│       ├── demo-pagina-inicial.png
+│       ├── demo-cartoes-alunos.png
+│       └── demo-painel-admin.png
 ├── core/                    # Configurações do projeto Django
 │   ├── settings.py
 │   └── urls.py
+├── templates/               # Página inicial e admin customizado
 └── aluno/                   # App de cartões acadêmicos
     ├── models.py
     ├── views.py
