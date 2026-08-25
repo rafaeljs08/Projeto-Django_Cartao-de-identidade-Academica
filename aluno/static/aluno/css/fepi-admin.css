@@ -1,0 +1,206 @@
+@import url("fepi.css");
+
+body.login {
+    background: var(--fepi-blue);
+}
+
+body.login #header {
+    display: none;
+}
+
+body.login #container {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    width: min(420px, 92vw);
+    margin: 2rem auto;
+}
+
+body.login #content {
+    padding: 0;
+}
+
+body.login #content-main {
+    float: none;
+    width: 100%;
+}
+
+body.login .fepi-login-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2rem 2rem 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    border-top: 4px solid var(--fepi-gold);
+}
+
+body.login .fepi-login-card .fepi-logo-wrap {
+    margin-bottom: 1.25rem;
+}
+
+body.login .fepi-login-card h1 {
+    text-align: center;
+    color: var(--fepi-blue-dark);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+}
+
+body.login .form-row label {
+    color: var(--fepi-blue-dark);
+    font-weight: 600;
+}
+
+body.login input[type="text"],
+body.login input[type="password"] {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 0.5rem 0.75rem;
+}
+
+body.login input[type="text"]:focus,
+body.login input[type="password"]:focus {
+    border-color: var(--fepi-blue);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 64, 136, 0.2);
+}
+
+body.login .submit-row {
+    padding: 1rem 0 0;
+    text-align: center;
+}
+
+body.login .submit-row input {
+    background: var(--fepi-blue);
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 2rem;
+    font-weight: 600;
+    width: 100%;
+}
+
+body.login .submit-row input:hover {
+    background: var(--fepi-blue-dark);
+}
+
+body.login #footer {
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+}
+
+#header {
+    background: var(--fepi-blue);
+    color: var(--white);
+    border-bottom: 3px solid var(--fepi-gold);
+}
+
+#branding {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+#branding h1 {
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+#branding h1 a:link,
+#branding h1 a:visited {
+    color: var(--white);
+}
+
+#branding h1 a:hover {
+    color: var(--fepi-gold-light);
+}
+
+#user-tools {
+    color: var(--white);
+}
+
+#user-tools a:focus,
+#user-tools a:hover {
+    color: var(--fepi-gold-light);
+}
+
+div.breadcrumbs {
+    background: var(--fepi-blue-dark);
+    color: var(--white);
+}
+
+div.breadcrumbs a {
+    color: var(--fepi-gold-light);
+}
+
+.module h2,
+.module caption,
+.inline-group h2 {
+    background: var(--fepi-blue);
+}
+
+a:link,
+a:visited {
+    color: var(--fepi-blue);
+}
+
+a:hover {
+    color: var(--fepi-gold);
+}
+
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+button[type="submit"] {
+    background: var(--fepi-blue);
+}
+
+.button:active,
+input[type="submit"]:active,
+input[type="button"]:active,
+.button:focus,
+input[type="submit"]:focus,
+input[type="button"]:focus,
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background: var(--fepi-blue-dark);
+}
+
+.button.default,
+input[type="submit"].default,
+.submit-row input.default {
+    background: var(--fepi-blue);
+    border-bottom: 3px solid var(--fepi-gold);
+}
+
+.button.default:active,
+input[type="submit"].default:active,
+.button.default:focus,
+input[type="submit"].default:focus,
+.button.default:hover,
+input[type="submit"].default:hover {
+    background: var(--fepi-blue-dark);
+}
+
+#changelist-filter h2 {
+    background: var(--fepi-blue-dark);
+}
+
+.selected {
+    background: rgba(0, 64, 136, 0.12);
+}
+
+#result_list thead th {
+    background: var(--fepi-blue-dark);
+    color: var(--white);
+}
+
+#nav-sidebar {
+    border-right: 1px solid rgba(0, 64, 136, 0.15);
+}
+
+#nav-sidebar .current-model {
+    background: rgba(0, 64, 136, 0.1);
+}

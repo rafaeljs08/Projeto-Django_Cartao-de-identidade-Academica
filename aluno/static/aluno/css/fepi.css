@@ -1,0 +1,294 @@
+:root {
+    --fepi-blue: #004088;
+    --fepi-blue-dark: #003B87;
+    --fepi-blue-mid: #004890;
+    --fepi-gold: #F8B800;
+    --fepi-gold-light: #F8C000;
+    --text-muted: #555555;
+    --white: #FFFFFF;
+
+    /* aliases legados */
+    --fepi-purple: var(--fepi-blue);
+    --fepi-purple-dark: var(--fepi-blue-dark);
+    --fepi-purple-mid: var(--fepi-blue-mid);
+}
+
+/* ── Logo ── */
+.fepi-logo-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 1.5rem;
+    width: fit-content;
+    max-width: 100%;
+    background: transparent;
+    padding: 0;
+}
+
+.fepi-logo-wrap img,
+.fepi-logo {
+    display: block;
+    margin: 0 auto;
+    height: 90px;
+    max-width: min(320px, 100%);
+    width: auto;
+    object-fit: contain;
+}
+
+.fepi-logo-wrap--sm img,
+.fepi-logo--sm {
+    height: 80px;
+    max-width: min(280px, 100%);
+}
+
+.fepi-logo-wrap--admin {
+    margin-bottom: 0;
+}
+
+.fepi-logo-wrap--admin img {
+    height: 52px;
+    max-width: 200px;
+}
+
+/* ── Página /aluno/ ── */
+.fepi-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--fepi-blue);
+    min-height: 100vh;
+    padding: 2rem 1rem 3rem;
+    margin: 0;
+}
+
+.fepi-page header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: var(--white);
+}
+
+.fepi-page header h1 {
+    font-size: 1.85rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.35rem;
+}
+
+.fepi-page header p {
+    opacity: 0.92;
+    font-size: 1rem;
+}
+
+.fepi-page .header-accent {
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--fepi-gold);
+    border-radius: 2px;
+    margin: 0.75rem auto 0;
+}
+
+.fepi-page main {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.fepi-page .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.fepi-page .card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border-top: 4px solid var(--fepi-gold);
+}
+
+.fepi-page .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+}
+
+.fepi-page .card-header {
+    background: var(--fepi-blue);
+    padding: 1.5rem;
+    color: var(--white);
+    position: relative;
+}
+
+.fepi-page .card-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--fepi-gold);
+}
+
+.fepi-page .card-header .avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--fepi-gold);
+    color: var(--fepi-blue-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    border: 3px solid rgba(255, 255, 255, 0.35);
+}
+
+.fepi-page .card-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.fepi-page .card-body {
+    padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.fepi-page .curso-badge {
+    display: inline-block;
+    background: var(--fepi-blue);
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+}
+
+.fepi-page .bio-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--fepi-blue);
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+}
+
+.fepi-page .bio {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.fepi-page .empty-state {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px dashed rgba(248, 184, 0, 0.55);
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    color: var(--white);
+}
+
+.fepi-page .empty-state p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+.fepi-page footer {
+    text-align: center;
+    margin-top: 2.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+.fepi-page footer strong {
+    color: var(--fepi-gold);
+}
+
+/* ── Página inicial / ── */
+.fepi-home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.fepi-home .home-container {
+    text-align: center;
+    color: var(--white);
+    max-width: 520px;
+    width: 100%;
+    padding: 2rem 1rem;
+}
+
+.fepi-home h1 {
+    font-size: 1.85rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.fepi-home .home-subtitle {
+    opacity: 0.92;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.fepi-home .header-accent {
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--fepi-gold);
+    border-radius: 2px;
+    margin: 1rem auto 2rem;
+}
+
+.fepi-home .home-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.fepi-home .home-btn {
+    display: block;
+    padding: 0.9rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.fepi-home .home-btn--primary {
+    background: var(--fepi-gold);
+    color: var(--fepi-blue-dark);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
+.fepi-home .home-btn--primary:hover {
+    background: var(--fepi-gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.fepi-home .home-btn--secondary {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.fepi-home .home-btn--secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--fepi-gold);
+    transform: translateY(-2px);
+}
+
+.fepi-home footer {
+    margin-top: auto;
+    padding-top: 2rem;
+}

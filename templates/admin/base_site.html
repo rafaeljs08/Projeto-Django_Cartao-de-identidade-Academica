@@ -1,0 +1,39 @@
+{% extends "admin/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | FEPI Admin{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'aluno/css/fepi.css' %}">
+<link rel="stylesheet" href="{% static 'aluno/css/fepi-admin.css' %}">
+{% endblock %}
+
+{% block branding %}
+<div id="branding">
+    <div class="fepi-logo-wrap fepi-logo-wrap--admin">
+        <img src="{% static 'aluno/img/fepi-logo.png' %}" alt="FEPI — Centro Universitário de Itajubá" class="fepi-logo fepi-logo--sm">
+    </div>
+    <h1 id="site-name"><a href="{% url 'admin:index' %}">Administração FEPI</a></h1>
+</div>
+{% endblock %}
+
+{% block userlinks %}
+{% if site_url %}
+    <a href="{{ site_url }}">Ir para a plataforma</a> /
+{% endif %}
+{% if user.is_active and user.is_staff %}
+    {% url 'django-admindocs-docroot' as docsroot %}
+    {% if docsroot %}
+        <a href="{{ docsroot }}">{% translate 'Documentation' %}</a> /
+    {% endif %}
+{% endif %}
+{% if user.has_usable_password %}
+    <a href="{% url 'admin:password_change' %}">{% translate 'Change password' %}</a> /
+{% endif %}
+<form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+    {% csrf_token %}
+    <button type="submit">{% translate 'Log out' %}</button>
+</form>
+{% include "admin/color_theme_toggle.html" %}
+{% endblock %}
