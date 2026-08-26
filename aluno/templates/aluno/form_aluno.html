@@ -1,0 +1,52 @@
+{% extends 'aluno/base_aluno.html' %}
+
+{% block title %}{{ titulo }}{% endblock %}
+{% block header_title %}{{ titulo }}{% endblock %}
+{% block header_subtitle %}Preencha os dados do cartão de identidade acadêmica{% endblock %}
+
+{% block content %}
+<div class="fepi-form-card">
+    <form method="post" class="fepi-form">
+        {% csrf_token %}
+
+        <div class="fepi-form-group">
+            <label for="nome" class="fepi-form-label">Nome</label>
+            <div class="fepi-input-wrap">
+                <span class="fepi-input-icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </span>
+                <input type="text" id="nome" name="nome" class="fepi-form-input"
+                       value="{{ aluno.nome|default:'' }}" required maxlength="100"
+                       placeholder="Nome completo do aluno">
+            </div>
+        </div>
+
+        <div class="fepi-form-group">
+            <label for="curso" class="fepi-form-label">Curso</label>
+            <div class="fepi-input-wrap">
+                <span class="fepi-input-icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+                </span>
+                <input type="text" id="curso" name="curso" class="fepi-form-input"
+                       value="{{ aluno.curso|default:'' }}" required maxlength="100"
+                       placeholder="Ex: ADS, SI, Engenharia de Software">
+            </div>
+        </div>
+
+        <div class="fepi-form-group">
+            <label for="bio" class="fepi-form-label">
+                Bio <span class="fepi-form-optional">(opcional)</span>
+            </label>
+            <textarea id="bio" name="bio" class="fepi-form-textarea" maxlength="280"
+                      placeholder="Interesses, objetivos e hobbies..."
+                      oninput="document.getElementById('bio-count').textContent = this.value.length">{{ aluno.bio|default:'' }}</textarea>
+            <p class="fepi-char-count"><span id="bio-count">{{ aluno.bio|default:''|length }}</span> / 280</p>
+        </div>
+
+        <div class="fepi-form-actions">
+            <button type="submit" class="fepi-btn fepi-btn--primary">Salvar cartão</button>
+            <a href="{% url 'listar_alunos' %}" class="fepi-btn fepi-btn--secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static "admin/css/dashboard.css" %}">{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block nav-breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div class="fepi-admin-hero">
+    <div class="fepi-admin-hero__text">
+        <p class="fepi-admin-hero__eyebrow">Dashboard</p>
+        <h2>Bem-vindo ao painel FEPI</h2>
+        <p>Gerencie cartões acadêmicos, alunos e a plataforma FEPI.</p>
+    </div>
+</div>
+
+<div class="fepi-admin-kpis">
+    <div class="fepi-admin-kpi">
+        <div class="fepi-admin-kpi__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </div>
+        <div>
+            <span class="fepi-admin-kpi__value">{{ fepi_total_alunos|default:"0" }}</span>
+            <span class="fepi-admin-kpi__label">Alunos cadastrados</span>
+        </div>
+    </div>
+    <div class="fepi-admin-kpi">
+        <div class="fepi-admin-kpi__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>
+            <span class="fepi-admin-kpi__value">{{ fepi_total_usuarios|default:"0" }}</span>
+            <span class="fepi-admin-kpi__label">Usuários administrativos</span>
+        </div>
+    </div>
+    <div class="fepi-admin-kpi">
+        <div class="fepi-admin-kpi__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div>
+            <span class="fepi-admin-kpi__value">{{ fepi_total_cursos|default:"0" }}</span>
+            <span class="fepi-admin-kpi__label">Cursos distintos</span>
+        </div>
+    </div>
+</div>
+
+<section class="fepi-admin-section">
+    <h3 class="fepi-admin-section__title">Ações rápidas</h3>
+    <div class="fepi-admin-shortcuts">
+        <a href="{% url 'admin:aluno_aluno_add' %}" class="fepi-admin-shortcut">
+            <span class="fepi-admin-shortcut__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+            <span class="fepi-admin-shortcut__title">Adicionar aluno</span>
+        </a>
+        <a href="{% url 'admin:aluno_aluno_changelist' %}" class="fepi-admin-shortcut">
+            <span class="fepi-admin-shortcut__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </span>
+            <span class="fepi-admin-shortcut__title">Ver alunos</span>
+        </a>
+        <a href="{% url 'admin:auth_user_changelist' %}" class="fepi-admin-shortcut">
+            <span class="fepi-admin-shortcut__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </span>
+            <span class="fepi-admin-shortcut__title">Gerenciar usuários</span>
+        </a>
+        <a href="{% url 'listar_alunos' %}" class="fepi-admin-shortcut fepi-admin-shortcut--gold">
+            <span class="fepi-admin-shortcut__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </span>
+            <span class="fepi-admin-shortcut__title">Cartões públicos</span>
+        </a>
+    </div>
+</section>
+
+<section class="fepi-admin-section">
+    <h3 class="fepi-admin-section__title">Alunos cadastrados recentemente</h3>
+    <div class="fepi-admin-panel">
+        {% if fepi_alunos_recentes %}
+        <table class="fepi-admin-table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Cadastro</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for aluno in fepi_alunos_recentes %}
+                <tr>
+                    <td>
+                        <a href="{% url 'admin:aluno_aluno_change' aluno.pk %}">{{ aluno.nome }}</a>
+                    </td>
+                    <td><span class="fepi-admin-badge">{{ aluno.curso }}</span></td>
+                    <td class="fepi-admin-table__date">{{ aluno.criado_em|date:"d/m/Y" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="fepi-admin-empty">Nenhum aluno cadastrado ainda.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>Ações recentes</h2>
+        <h3>Suas ações</h3>
+            {% load log %}
+            {% get_admin_log 8 as admin_log for_user user %}
+            {% if not admin_log %}
+            <p class="fepi-admin-empty">Nenhuma ação registrada.</p>
+            {% else %}
+            <ul class="actionlist">
+            {% for entry in admin_log %}
+            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                <span class="visually-hidden">{% if entry.is_addition %}Adicionado:{% elif entry.is_change %}Alterado:{% elif entry.is_deletion %}Excluído:{% endif %}</span>
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                    {{ entry.object_repr }}
+                {% else %}
+                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                {% endif %}
+                <br>
+                {% if entry.content_type %}
+                    <span class="mini quiet">{% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}</span>
+                {% else %}
+                    <span class="mini quiet">Conteúdo desconhecido</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+    </div>
+</div>
+{% endblock %}

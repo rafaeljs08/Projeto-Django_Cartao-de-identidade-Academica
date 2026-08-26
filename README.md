@@ -56,20 +56,19 @@ cd Projeto-Django_Cartao-de-identidade-Academica
 
 # 2. Crie e ative o ambiente virtual
 python -m venv venv
-venv\Scripts\Activate.ps1
+.\venv\Scripts\python.exe -m pip install -r requirements.txt
 
-# 3. Instale as dependências
-pip install -r requirements.txt
+# 3. Aplique as migrações do banco
+.\venv\Scripts\python.exe manage.py migrate
 
-# 4. Aplique as migrações do banco
-python manage.py migrate
+# 4. (Opcional) Popule alunos de demonstração
+.\venv\Scripts\python.exe manage.py seed_alunos
 
-# 5. Crie um superusuário para acessar o admin
-python manage.py createsuperuser
-
-# 6. Inicie o servidor
-python manage.py runserver
+# 5. Inicie o servidor
+.\venv\Scripts\python.exe manage.py runserver
 ```
+
+> **Atalho no Windows:** dê duplo clique em `run.bat` para iniciar o servidor.
 
 ### Acessos no navegador
 
@@ -83,10 +82,17 @@ python manage.py runserver
 
 ##  Cadastrar alunos
 
+### Área pública (`/aluno/`)
+
+CRUD completo **sem login**: criar, editar e excluir cartões diretamente na galeria.
+
+### Painel administrativo (`/admin/`)
+
+Dashboard moderno com KPIs, sidebar, alunos recentes e ações rápidas — **acesso direto, sem usuário e senha**.
+
 1. Acesse http://127.0.0.1:8000/admin/
-2. Faça login com o superusuário criado
-3. Em **Alunos**, clique em **Adicionar Aluno**
-4. Preencha **Nome**, **Curso** e **Bio** (máx. 280 caracteres) e salve
+2. Use **Adicionar aluno** ou navegue em **Alunos**
+3. Preencha **Nome**, **Curso** e **Bio** (máx. 280 caracteres) e salve
 
 ---
 
@@ -95,8 +101,11 @@ python manage.py runserver
 | URL | Método | Descrição |
 |-----|--------|-----------|
 | `/` | `GET` | Página inicial com acesso à plataforma |
-| `/admin/` | `GET` / `POST` | Painel administrativo — cadastro de alunos |
 | `/aluno/` | `GET` | Lista os cartões de identidade acadêmica |
+| `/aluno/novo/` | `GET` / `POST` | Criar novo aluno |
+| `/aluno/<id>/editar/` | `GET` / `POST` | Editar aluno |
+| `/aluno/<id>/excluir/` | `GET` / `POST` | Excluir aluno |
+| `/admin/` | `GET` | Painel administrativo com dashboard |
 
 ---
 
@@ -133,7 +142,7 @@ Página de visualização dos alunos cadastrados, mostrando nome, curso e biogra
 
 ###  Painel Administrativo
 
-Área administrativa do Django utilizada para cadastrar, editar e gerenciar os alunos.
+Dashboard administrativo customizado com sidebar, KPIs, ações rápidas e tabela de alunos recentes.
 
 ![Painel administrativo](docs/assets/demo-painel-admin.png)
 
@@ -144,6 +153,7 @@ Página de visualização dos alunos cadastrados, mostrando nome, curso e biogra
 ```
 Projeto-Django_Cartao-de-identidade-Academica/
 ├── manage.py
+├── run.bat
 ├── requirements.txt
 ├── README.md
 ├── docs/
@@ -152,18 +162,23 @@ Projeto-Django_Cartao-de-identidade-Academica/
 │       ├── demo-pagina-inicial.png
 │       ├── demo-cartoes-alunos.png
 │       └── demo-painel-admin.png
-├── core/                    # Configurações do projeto Django
+├── core/
 │   ├── settings.py
-│   └── urls.py
-├── templates/               # Página inicial e admin customizado
-└── aluno/                   # App de cartões acadêmicos
+│   ├── urls.py
+│   └── views.py
+├── templates/
+│   ├── home.html
+│   └── admin/
+└── aluno/
     ├── models.py
     ├── views.py
     ├── urls.py
     ├── admin.py
-    ├── static/aluno/img/
-    └── templates/
-        └── aluno.html
+    ├── tests.py
+    ├── management/commands/seed_alunos.py
+    ├── static/aluno/css/
+    ├── static/aluno/js/
+    └── templates/aluno/
 ```
 
 ---

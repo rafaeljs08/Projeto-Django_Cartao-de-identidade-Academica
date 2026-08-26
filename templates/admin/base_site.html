@@ -5,9 +5,18 @@
 
 {% block extrastyle %}
 {{ block.super }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{% static 'aluno/css/fepi.css' %}">
 <link rel="stylesheet" href="{% static 'aluno/css/fepi-admin.css' %}">
 {% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<script src="{% static 'aluno/js/fepi-admin.js' %}" defer></script>
+{% endblock %}
+
+{% block bodyclass %}fepi-admin{% endblock %}
 
 {% block branding %}
 <div id="branding">
@@ -18,22 +27,25 @@
 </div>
 {% endblock %}
 
-{% block userlinks %}
-{% if site_url %}
-    <a href="{{ site_url }}">Ir para a plataforma</a> /
-{% endif %}
-{% if user.is_active and user.is_staff %}
-    {% url 'django-admindocs-docroot' as docsroot %}
-    {% if docsroot %}
-        <a href="{{ docsroot }}">{% translate 'Documentation' %}</a> /
+{% block usertools %}
+{% if has_permission %}
+<div id="user-tools">
+    {% block welcome-msg %}
+    <span class="fepi-admin-user">
+        <span class="fepi-admin-user__avatar" aria-hidden="true">F</span>
+        <span class="fepi-admin-user__name">FEPI</span>
+    </span>
+    {% endblock %}
+    {% block userlinks %}
+    {% if site_url %}
+        <a href="{{ site_url }}">Plataforma</a>
     {% endif %}
+    {% endblock %}
+</div>
 {% endif %}
-{% if user.has_usable_password %}
-    <a href="{% url 'admin:password_change' %}">{% translate 'Change password' %}</a> /
-{% endif %}
-<form id="logout-form" method="post" action="{% url 'admin:logout' %}">
-    {% csrf_token %}
-    <button type="submit">{% translate 'Log out' %}</button>
-</form>
-{% include "admin/color_theme_toggle.html" %}
+{% endblock %}
+
+{% block extrabody %}
+<div id="fepi-sidebar-overlay" aria-hidden="true"></div>
+{{ block.super }}
 {% endblock %}

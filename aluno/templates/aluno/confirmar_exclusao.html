@@ -1,0 +1,24 @@
+{% extends 'aluno/base_aluno.html' %}
+
+{% block title %}Confirmar Exclusão{% endblock %}
+{% block header_title %}Confirmar Exclusão{% endblock %}
+{% block header_subtitle %}Esta ação é irreversível{% endblock %}
+
+{% block content %}
+<div class="fepi-form-card fepi-alert-card">
+    <div class="fepi-alert-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div class="fepi-alert">
+        <p class="fepi-alert-title">Excluir este cartão?</p>
+        <p class="fepi-alert-text">{{ aluno.nome }} — {{ aluno.curso }}</p>
+        <p class="fepi-alert-hint">O cartão de identidade acadêmica será removido permanentemente do sistema.</p>
+    </div>
+
+    <form method="post" class="fepi-form-actions fepi-form-actions--center">
+        {% csrf_token %}
+        <button type="submit" class="fepi-btn fepi-btn--danger">Confirmar exclusão</button>
+        <a href="{% url 'listar_alunos' %}" class="fepi-btn fepi-btn--secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

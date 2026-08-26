@@ -1,32 +1,26 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem-vindo | FEPI — Cartão de Identidade Acadêmica</title>
+    <title>{% block title %}Cartão de Identidade Acadêmica{% endblock %} | FEPI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{% static 'aluno/css/fepi.css' %}">
 </head>
-<body class="fepi-page fepi-home">
-    <main class="home-container">
+<body class="fepi-page">
+    <header>
         <div class="fepi-logo-wrap">
             <img src="{% static 'aluno/img/fepi-logo.png' %}" alt="FEPI — Centro Universitário de Itajubá" class="fepi-logo">
         </div>
-
-        <h1>Cartão de Identidade Acadêmica</h1>
-        <p class="home-subtitle">Plataforma de perfis acadêmicos da FEPI — estilo ficha de personagem</p>
+        <h1>{% block header_title %}Cartão de Identidade Acadêmica{% endblock %}</h1>
+        <p>{% block header_subtitle %}Conheça os alunos — perfis no estilo ficha de personagem{% endblock %}</p>
         <div class="header-accent"></div>
+    </header>
 
-        <div class="home-actions">
-            <a href="{% url 'listar_alunos' %}" class="home-btn home-btn--primary">
-                Ver cartões dos alunos
-            </a>
-            <a href="{% url 'admin:index' %}" class="home-btn home-btn--secondary">
-                Área administrativa
-            </a>
-        </div>
+    <main>
+        {% block content %}{% endblock %}
     </main>
 
     <footer>

@@ -1,206 +1,891 @@
 @import url("fepi.css");
 
-body.login {
-    background: var(--fepi-blue);
+:root {
+    --admin-bg: #f5f7fa;
+    --admin-surface: #ffffff;
+    --admin-border: #e5e7eb;
+    --admin-text: #1f2937;
+    --admin-text-muted: #6b7280;
+    --admin-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --admin-shadow-md: 0 4px 16px rgba(0, 20, 60, 0.08);
+    --admin-radius: 10px;
+    --admin-sidebar-width: 240px;
 }
 
-body.login #header {
-    display: none;
+/* ── Fix: Django SVG sprite sheet must stay hidden ── */
+body.fepi-admin svg.base-svgs {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
 }
 
-body.login #container {
+/* ── Admin shell ── */
+body.fepi-admin:not(.login) {
+    font-family: var(--font-body);
+    background: var(--admin-bg);
+    min-height: 100vh;
+    color: var(--admin-text);
+}
+
+body.fepi-admin:not(.login) #container {
     background: transparent;
-    border: none;
-    box-shadow: none;
-    width: min(420px, 92vw);
-    margin: 2rem auto;
 }
 
-body.login #content {
-    padding: 0;
+body.fepi-admin:not(.login) .main {
+    background: transparent;
 }
 
-body.login #content-main {
-    float: none;
-    width: 100%;
+body.fepi-admin:not(.login) .main.shifted > #nav-sidebar,
+body.fepi-admin:not(.login) .main > #nav-sidebar {
+    flex: 0 0 var(--admin-sidebar-width);
 }
 
-body.login .fepi-login-card {
-    background: var(--white);
-    border-radius: 16px;
-    padding: 2rem 2rem 1.5rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-    border-top: 4px solid var(--fepi-gold);
-}
-
-body.login .fepi-login-card .fepi-logo-wrap {
-    margin-bottom: 1.25rem;
-}
-
-body.login .fepi-login-card h1 {
-    text-align: center;
-    color: var(--fepi-blue-dark);
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 1.25rem;
-}
-
-body.login .form-row label {
-    color: var(--fepi-blue-dark);
-    font-weight: 600;
-}
-
-body.login input[type="text"],
-body.login input[type="password"] {
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    padding: 0.5rem 0.75rem;
-}
-
-body.login input[type="text"]:focus,
-body.login input[type="password"]:focus {
-    border-color: var(--fepi-blue);
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 64, 136, 0.2);
-}
-
-body.login .submit-row {
-    padding: 1rem 0 0;
-    text-align: center;
-}
-
-body.login .submit-row input {
-    background: var(--fepi-blue);
-    border: none;
-    border-radius: 8px;
-    padding: 0.6rem 2rem;
-    font-weight: 600;
-    width: 100%;
-}
-
-body.login .submit-row input:hover {
+/* ── Header / Topbar ── */
+body.fepi-admin #header {
     background: var(--fepi-blue-dark);
-}
-
-body.login #footer {
-    color: rgba(255, 255, 255, 0.85);
-    text-align: center;
-}
-
-#header {
-    background: var(--fepi-blue);
     color: var(--white);
     border-bottom: 3px solid var(--fepi-gold);
+    box-shadow: var(--admin-shadow-md);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-#branding {
+body.fepi-admin #branding {
     display: flex;
     align-items: center;
     gap: 0.75rem;
 }
 
-#branding h1 {
+body.fepi-admin #branding h1 {
     margin: 0;
     padding: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+}
+
+body.fepi-admin #branding h1 a:link,
+body.fepi-admin #branding h1 a:visited {
+    color: var(--white);
+}
+
+body.fepi-admin #branding h1 a:hover {
+    color: var(--fepi-gold-light);
+}
+
+body.fepi-admin #user-tools {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 0.875rem;
+}
+
+body.fepi-admin .fepi-admin-user {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+body.fepi-admin .fepi-admin-user__avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--fepi-gold);
+    color: var(--fepi-blue-dark);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body.fepi-admin .fepi-admin-user__name {
     font-weight: 600;
-    font-size: 1.1rem;
 }
 
-#branding h1 a:link,
-#branding h1 a:visited {
-    color: var(--white);
+body.fepi-admin #user-tools a {
+    color: rgba(255, 255, 255, 0.92);
+    text-decoration: none;
+    font-weight: 500;
 }
 
-#branding h1 a:hover {
+body.fepi-admin #user-tools a:hover {
     color: var(--fepi-gold-light);
 }
 
-#user-tools {
+body.fepi-admin #user-tools form {
+    margin: 0;
+}
+
+body.fepi-admin #user-tools form button {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     color: var(--white);
+    cursor: pointer;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 0.35rem 0.85rem;
+    border-radius: 6px;
+    text-decoration: none;
 }
 
-#user-tools a:focus,
-#user-tools a:hover {
-    color: var(--fepi-gold-light);
+body.fepi-admin #user-tools form button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--fepi-gold);
 }
 
-div.breadcrumbs {
-    background: var(--fepi-blue-dark);
-    color: var(--white);
+/* ── Breadcrumbs ── */
+body.fepi-admin div.breadcrumbs {
+    background: var(--admin-surface);
+    color: var(--admin-text-muted);
+    border-bottom: 1px solid var(--admin-border);
+    padding: 0.65rem 1.5rem;
+    font-size: 0.8125rem;
 }
 
-div.breadcrumbs a {
-    color: var(--fepi-gold-light);
-}
-
-.module h2,
-.module caption,
-.inline-group h2 {
-    background: var(--fepi-blue);
-}
-
-a:link,
-a:visited {
+body.fepi-admin div.breadcrumbs a {
     color: var(--fepi-blue);
 }
 
-a:hover {
+body.fepi-admin div.breadcrumbs a:hover {
     color: var(--fepi-gold);
 }
 
-.button,
-input[type="submit"],
-input[type="button"],
-.submit-row input,
-button[type="submit"] {
+/* ── Sidebar ── */
+body.fepi-admin #nav-sidebar.fepi-admin-sidebar {
+    background: var(--admin-surface);
+    border-right: 1px solid var(--admin-border);
+    box-shadow: var(--admin-shadow);
+    padding: 1rem 0.75rem;
+    width: var(--admin-sidebar-width);
+}
+
+body.fepi-admin .fepi-sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.25rem 0.5rem 1rem;
+    border-bottom: 1px solid var(--admin-border);
+    margin-bottom: 0.75rem;
+}
+
+body.fepi-admin .fepi-sidebar-brand__logo {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+}
+
+body.fepi-admin .fepi-sidebar-brand__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--fepi-blue-dark);
+}
+
+body.fepi-admin .fepi-sidebar-nav {
+    list-style: none;
+    margin: 0 0 0.75rem;
+    padding: 0;
+}
+
+body.fepi-admin .fepi-sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.65rem;
+    border-radius: 8px;
+    color: var(--admin-text);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+body.fepi-admin .fepi-sidebar-link:hover {
+    background: rgba(0, 64, 136, 0.06);
+    color: var(--fepi-blue);
+}
+
+body.fepi-admin .fepi-sidebar-link--active {
+    background: rgba(248, 184, 0, 0.15);
+    color: var(--fepi-blue-dark);
+    font-weight: 600;
+    border-left: 3px solid var(--fepi-gold);
+    padding-left: calc(0.65rem - 3px);
+}
+
+body.fepi-admin .fepi-sidebar-link__icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    opacity: 0.85;
+}
+
+body.fepi-admin .fepi-sidebar-divider {
+    height: 1px;
+    background: var(--admin-border);
+    margin: 0.5rem 0 0.75rem;
+}
+
+body.fepi-admin #nav-filter {
+    width: 100%;
+    margin-bottom: 0.75rem;
+    padding: 0.45rem 0.65rem;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    font-size: 0.8125rem;
+}
+
+body.fepi-admin #nav-sidebar .module {
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    margin: 0;
+}
+
+body.fepi-admin #nav-sidebar .module::before {
+    display: none;
+}
+
+body.fepi-admin #nav-sidebar .module caption {
+    background: transparent;
+    color: var(--admin-text-muted);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.5rem 0.65rem;
+}
+
+body.fepi-admin #nav-sidebar .module caption a.section {
+    color: var(--admin-text-muted);
+}
+
+body.fepi-admin #nav-sidebar .module table th a {
+    font-size: 0.8125rem;
+    color: var(--admin-text);
+}
+
+body.fepi-admin #nav-sidebar .current-model {
+    background: rgba(248, 184, 0, 0.12);
+}
+
+body.fepi-admin .toggle-nav-sidebar {
     background: var(--fepi-blue);
+    border-color: var(--fepi-blue);
 }
 
-.button:active,
-input[type="submit"]:active,
-input[type="button"]:active,
-.button:focus,
-input[type="submit"]:focus,
-input[type="button"]:focus,
-.button:hover,
-input[type="submit"]:hover,
-input[type="button"]:hover {
-    background: var(--fepi-blue-dark);
+body.fepi-admin #fepi-sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 20, 60, 0.45);
+    z-index: 998;
 }
 
-.button.default,
-input[type="submit"].default,
-.submit-row input.default {
-    background: var(--fepi-blue);
-    border-bottom: 3px solid var(--fepi-gold);
+body.fepi-admin.fepi-sidebar-open #fepi-sidebar-overlay {
+    display: block;
 }
 
-.button.default:active,
-input[type="submit"].default:active,
-.button.default:focus,
-input[type="submit"].default:focus,
-.button.default:hover,
-input[type="submit"].default:hover {
-    background: var(--fepi-blue-dark);
+/* ── Main content ── */
+body.fepi-admin #content-start.content {
+    padding: 1.5rem;
 }
 
-#changelist-filter h2 {
-    background: var(--fepi-blue-dark);
+body.fepi-admin #content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
 }
 
-.selected {
-    background: rgba(0, 64, 136, 0.12);
+body.fepi-admin #content h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: var(--admin-text);
+    margin: 0 0 1.25rem;
 }
 
-#result_list thead th {
+/* ── Dashboard hero ── */
+.fepi-admin-hero {
+    background: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--admin-shadow);
+    border-left: 4px solid var(--fepi-gold);
+}
+
+.fepi-admin-hero__eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fepi-blue);
+    margin: 0 0 0.35rem;
+}
+
+.fepi-admin-hero h2 {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 700;
+    margin: 0 0 0.35rem;
+    color: var(--admin-text);
+    letter-spacing: -0.02em;
+}
+
+.fepi-admin-hero p {
+    margin: 0;
+    color: var(--admin-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+/* ── KPI cards ── */
+.fepi-admin-kpis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.fepi-admin-kpi {
+    background: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    padding: 1.15rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: var(--admin-shadow);
+    transition: box-shadow 0.2s ease;
+}
+
+.fepi-admin-kpi:hover {
+    box-shadow: var(--admin-shadow-md);
+}
+
+.fepi-admin-kpi__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(0, 64, 136, 0.08);
+    color: var(--fepi-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.fepi-admin-kpi__icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.fepi-admin-kpi__value {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.625rem;
+    font-weight: 800;
+    color: var(--fepi-blue-dark);
+    line-height: 1.1;
+}
+
+.fepi-admin-kpi__label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--admin-text-muted);
+    margin-top: 0.15rem;
+    font-weight: 500;
+}
+
+/* ── Sections ── */
+.fepi-admin-section {
+    margin-bottom: 1.5rem;
+}
+
+.fepi-admin-section__title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--admin-text);
+    margin: 0 0 0.75rem;
+}
+
+/* ── Shortcuts ── */
+.fepi-admin-shortcuts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+}
+
+.fepi-admin-shortcut {
+    background: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    padding: 1rem;
+    text-decoration: none;
+    box-shadow: var(--admin-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fepi-admin-shortcut:hover {
+    border-color: rgba(0, 64, 136, 0.25);
+    box-shadow: var(--admin-shadow-md);
+}
+
+.fepi-admin-shortcut--gold {
+    border-color: rgba(248, 184, 0, 0.35);
+}
+
+.fepi-admin-shortcut__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(0, 64, 136, 0.08);
+    color: var(--fepi-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fepi-admin-shortcut--gold .fepi-admin-shortcut__icon {
+    background: rgba(248, 184, 0, 0.15);
+    color: var(--fepi-blue-dark);
+}
+
+.fepi-admin-shortcut__icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.fepi-admin-shortcut__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--admin-text);
+}
+
+/* ── Recent students table ── */
+.fepi-admin-panel {
+    background: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    box-shadow: var(--admin-shadow);
+    overflow: hidden;
+}
+
+.fepi-admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.fepi-admin-table thead th {
     background: var(--fepi-blue-dark);
     color: var(--white);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    padding: 0.75rem 1rem;
+    text-align: left;
 }
 
-#nav-sidebar {
-    border-right: 1px solid rgba(0, 64, 136, 0.15);
+.fepi-admin-table tbody td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--admin-border);
+    color: var(--admin-text);
 }
 
-#nav-sidebar .current-model {
-    background: rgba(0, 64, 136, 0.1);
+.fepi-admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.fepi-admin-table tbody tr:hover {
+    background: rgba(0, 64, 136, 0.03);
+}
+
+.fepi-admin-table tbody td a {
+    font-weight: 600;
+    color: var(--fepi-blue);
+}
+
+.fepi-admin-table__date {
+    color: var(--admin-text-muted);
+    font-size: 0.8125rem;
+    white-space: nowrap;
+}
+
+.fepi-admin-empty {
+    padding: 1.25rem 1rem;
+    color: var(--admin-text-muted);
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+/* ── Badges & avatars (changelist) ── */
+.fepi-admin-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--fepi-gold);
+    color: var(--fepi-blue-dark);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.875rem;
+}
+
+.fepi-admin-badge {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    border-radius: 99px;
+    background: rgba(0, 64, 136, 0.08);
+    color: var(--fepi-blue-dark);
+    font-size: 0.75rem;
+    font-weight: 600;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+body.fepi-admin #result_list tbody td.field-nome {
+    font-weight: 600;
+}
+
+body.fepi-admin #result_list tbody td.field-bio_resumo {
+    color: var(--admin-text-muted);
+    font-size: 0.8125rem;
+}
+
+/* ── Module cards ── */
+body.fepi-admin .module {
+    background: var(--admin-surface);
+    border-radius: var(--admin-radius);
+    overflow: hidden;
+    box-shadow: var(--admin-shadow);
+    border: 1px solid var(--admin-border);
+    margin-bottom: 1.25rem;
+}
+
+body.fepi-admin .module h2,
+body.fepi-admin .module caption,
+body.fepi-admin .inline-group h2 {
+    background: var(--fepi-blue-dark);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem;
+    margin: 0;
+    border: none;
+}
+
+body.fepi-admin .module table th,
+body.fepi-admin .module table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--admin-border);
+    font-size: 0.875rem;
+}
+
+/* Fix: scope action link pills to table cells only (not actionlist li) */
+body.fepi-admin .module table td .addlink,
+body.fepi-admin .module table td .changelink,
+body.fepi-admin .module table td .viewlink {
+    font-weight: 600;
+    font-size: 0.8125rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    background: rgba(0, 64, 136, 0.08);
+    display: inline-block;
+}
+
+body.fepi-admin .module table td .addlink:hover,
+body.fepi-admin .module table td .changelink:hover,
+body.fepi-admin .module table td .viewlink:hover {
+    background: rgba(248, 184, 0, 0.2);
+}
+
+/* Fix: actionlist icons — do not override li display/background */
+body.fepi-admin .actionlist {
+    padding: 0 1rem 1rem;
+    margin: 0;
+    list-style: none;
+}
+
+body.fepi-admin .actionlist li {
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    border-bottom: 1px solid var(--admin-border);
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    background: transparent;
+    display: block;
+}
+
+body.fepi-admin .actionlist li:last-child {
+    border-bottom: none;
+}
+
+/* ── Dashboard layout ── */
+body.fepi-admin.dashboard #content {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+body.fepi-admin.dashboard #content-main {
+    min-width: 0;
+}
+
+body.fepi-admin.dashboard #recent-actions-module h3 {
+    padding: 0.65rem 1rem 0.25rem;
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--admin-text-muted);
+}
+
+/* ── Links ── */
+body.fepi-admin a:link,
+body.fepi-admin a:visited {
+    color: var(--fepi-blue);
+}
+
+body.fepi-admin a:hover {
+    color: var(--fepi-gold);
+}
+
+/* ── Buttons ── */
+body.fepi-admin .button,
+body.fepi-admin input[type="submit"],
+body.fepi-admin input[type="button"],
+body.fepi-admin .submit-row input,
+body.fepi-admin button[type="submit"]:not(#logout-form button) {
+    background: var(--fepi-blue);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    border: none;
+}
+
+body.fepi-admin .button:hover,
+body.fepi-admin input[type="submit"]:hover,
+body.fepi-admin input[type="button"]:hover {
+    background: var(--fepi-blue-dark);
+}
+
+body.fepi-admin .button.default,
+body.fepi-admin input[type="submit"].default {
+    background: var(--fepi-gold);
+    color: var(--fepi-blue-dark);
+}
+
+body.fepi-admin .button.default:hover,
+body.fepi-admin input[type="submit"].default:hover {
+    background: var(--fepi-gold-light);
+}
+
+/* ── Forms ── */
+body.fepi-admin fieldset.module {
+    border: 1px solid var(--admin-border);
+}
+
+body.fepi-admin input[type="text"],
+body.fepi-admin input[type="password"],
+body.fepi-admin input[type="email"],
+body.fepi-admin input[type="url"],
+body.fepi-admin input[type="number"],
+body.fepi-admin textarea,
+body.fepi-admin select {
+    border-radius: 8px;
+    border: 1px solid var(--admin-border);
+    padding: 0.5rem 0.75rem;
+    font-family: var(--font-body);
+}
+
+body.fepi-admin input:focus,
+body.fepi-admin textarea:focus,
+body.fepi-admin select:focus {
+    border-color: var(--fepi-blue);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 64, 136, 0.12);
+}
+
+body.fepi-admin .submit-row {
+    background: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    padding: 1rem;
+}
+
+/* ── Changelist ── */
+body.fepi-admin #changelist {
+    background: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: var(--admin-radius);
+    box-shadow: var(--admin-shadow);
+    overflow: hidden;
+}
+
+body.fepi-admin #result_list thead th {
+    background: var(--fepi-blue-dark);
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
+    padding: 0.65rem 1rem;
+}
+
+body.fepi-admin .selected {
+    background: rgba(248, 184, 0, 0.1);
+}
+
+/* ── Messages & footer ── */
+body.fepi-admin .messagelist li {
+    border-radius: 8px;
+}
+
+body.fepi-admin #footer {
+    color: var(--admin-text-muted);
+    text-align: center;
+    padding: 1.25rem;
+    font-size: 0.8125rem;
+}
+
+/* ── Login page ── */
+body.fepi-admin.login {
+    background: linear-gradient(145deg, var(--fepi-blue-dark) 0%, var(--fepi-blue) 100%);
+    min-height: 100vh;
+    font-family: var(--font-body);
+}
+
+body.fepi-admin.login #header {
+    display: none;
+}
+
+body.fepi-admin.login #container {
+    background: transparent;
+    width: min(400px, 92vw);
+    margin: 2rem auto;
+}
+
+body.fepi-admin.login #content {
+    padding: 0;
+}
+
+body.fepi-admin.login .fepi-login-card {
+    background: var(--admin-surface);
+    border-radius: var(--admin-radius);
+    padding: 2rem;
+    box-shadow: var(--admin-shadow-md);
+    border: 1px solid var(--admin-border);
+    border-top: 4px solid var(--fepi-gold);
+}
+
+body.fepi-admin.login .fepi-login-card h1 {
+    text-align: center;
+    font-family: var(--font-display);
+    color: var(--fepi-blue-dark);
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+body.fepi-admin.login .fepi-login-subtitle {
+    text-align: center;
+    color: var(--admin-text-muted);
+    font-size: 0.875rem;
+    margin: 0 0 1.25rem;
+}
+
+body.fepi-admin.login input[type="text"],
+body.fepi-admin.login input[type="password"] {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--admin-border);
+    padding: 0.6rem 0.75rem;
+}
+
+body.fepi-admin.login .submit-row input {
+    background: var(--fepi-gold);
+    color: var(--fepi-blue-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem;
+    font-weight: 700;
+    width: 100%;
+    cursor: pointer;
+}
+
+body.fepi-admin.login .fepi-login-back {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    body.fepi-admin #nav-sidebar.fepi-admin-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 999;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+    }
+
+    body.fepi-admin.fepi-sidebar-open #nav-sidebar.fepi-admin-sidebar {
+        transform: translateX(0);
+    }
+
+    body.fepi-admin.dashboard #content {
+        grid-template-columns: 1fr;
+    }
+
+    .fepi-admin-kpis {
+        grid-template-columns: 1fr;
+    }
+
+    .fepi-admin-shortcuts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    body.fepi-admin #content-start.content {
+        padding: 1rem;
+    }
+
+    body.fepi-admin #header {
+        padding: 0.65rem 1rem;
+    }
+
+    .fepi-admin-shortcuts {
+        grid-template-columns: 1fr;
+    }
+
+    body.fepi-admin .fepi-admin-user__name {
+        display: none;
+    }
 }

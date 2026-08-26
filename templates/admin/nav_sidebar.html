@@ -1,0 +1,43 @@
+{% load i18n static %}
+
+<button type="button" class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="{% translate 'Toggle navigation' %}"></button>
+<nav class="sticky fepi-admin-sidebar" id="nav-sidebar" aria-label="{% translate 'Sidebar' %}">
+    <div class="fepi-sidebar-brand">
+        <img src="{% static 'aluno/img/fepi-logo.png' %}" alt="FEPI" class="fepi-sidebar-brand__logo">
+        <span class="fepi-sidebar-brand__title">Administração</span>
+    </div>
+
+    <ul class="fepi-sidebar-nav">
+        <li>
+            <a href="{% url 'admin:index' %}" class="fepi-sidebar-link{% if request.path == '/admin/' %} fepi-sidebar-link--active{% endif %}">
+                <svg class="fepi-sidebar-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                Dashboard
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'admin:aluno_aluno_changelist' %}" class="fepi-sidebar-link{% if '/admin/aluno/aluno/' in request.path %} fepi-sidebar-link--active{% endif %}">
+                <svg class="fepi-sidebar-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                Alunos
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'admin:auth_user_changelist' %}" class="fepi-sidebar-link{% if '/admin/auth/user/' in request.path %} fepi-sidebar-link--active{% endif %}">
+                <svg class="fepi-sidebar-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Usuários
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'admin:auth_group_changelist' %}" class="fepi-sidebar-link{% if '/admin/auth/group/' in request.path %} fepi-sidebar-link--active{% endif %}">
+                <svg class="fepi-sidebar-link__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Grupos
+            </a>
+        </li>
+    </ul>
+
+    <div class="fepi-sidebar-divider"></div>
+
+    <input type="search" id="nav-filter"
+           placeholder="{% translate 'Start typing to filter…' %}"
+           aria-label="{% translate 'Filter navigation items' %}">
+    {% include 'admin/app_list.html' with app_list=available_apps show_changelinks=False %}
+</nav>
