@@ -2,7 +2,7 @@
 
 <img src="docs/assets/fepi-logo.png" alt="FEPI — Centro Universitário de Itajubá" width="280">
 
-#  Cartão de Identidade Acadêmica
+# Cartão de Identidade Acadêmica
 
 **Backend Django — Disciplina Programação Backend (Python/Django)**
 
@@ -51,8 +51,8 @@ Desenvolvido como trabalho da disciplina **Programação Backend**, utilizando *
 
 ```powershell
 # 1. Clone o repositório
-git clone https://github.com/rafaeljs08/Projeto-Django_Cartao-de-identidade-Academica.git
-cd Projeto-Django_Cartao-de-identidade-Academica
+git clone https://github.com/rafaeljs08/cartao-identidade-academica.git
+cd cartao-identidade-academica
 
 # 2. Crie e ative o ambiente virtual
 python -m venv venv
@@ -151,7 +151,7 @@ Dashboard administrativo customizado com sidebar, KPIs, ações rápidas e tabel
 ##  Estrutura do projeto
 
 ```
-Projeto-Django_Cartao-de-identidade-Academica/
+cartao-identidade-academica/
 ├── manage.py
 ├── run.bat
 ├── requirements.txt
